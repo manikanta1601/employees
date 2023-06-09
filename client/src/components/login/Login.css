@@ -1,0 +1,77 @@
+/* Login.css */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.login-container--background {
+  background-image: url("https://img.freepik.com/free-photo/standard-quality-control-collage-concept_23-2149595835.jpg?w=1060&t=st=1686192631~exp=1686193231~hmac=ef36b8972faf6ca22a3c7f9de765a0c6ee8647ab1fde9af25f7cf9077e236dc4");
+  /* Additional background styles */
+
+  /* Responsive background image */
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  .login-container--background {
+    background-size: contain;
+    background-position: top;
+  }
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.login-form .form-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.login-form .form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.login-form .text-danger {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+  color: red;
+}
+
+.login-form .btn-primary {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-form .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 767px) {
+  .login-form {
+    max-width: 100%;
+  }
+}

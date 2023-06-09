@@ -1,0 +1,89 @@
+.add-user-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .add-user-container {
+    background-image: url("https://img.freepik.com/free-vector/wavy-background-with-copy-space_52683-65230.jpg?w=1060&t=st=1686192902~exp=1686193502~hmac=f1da730aa06a650e3b16a9256f7549d119cd7a1a114289aec3dbb547be1d8f7a");
+    /* Additional background styles */
+  
+    /* Responsive background image */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  @media (max-width: 768px) {
+    .add-user-container {
+      background-size: contain;
+      background-position: top;
+    }
+  }
+  
+  
+  .add-user-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .add-user-form {
+    display: grid;
+    gap: 20px;
+  }
+  
+  .add-user-label {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .add-user-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .add-user-input:focus {
+    outline: none;
+    border-color: #4c9aff;
+  }
+  
+  .add-user-input-error {
+    border-color: #ff5252;
+  }
+  
+  .add-user-error-message {
+    color: #ff5252;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .add-user-button {
+    background-color: #4c9aff;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-user-button:hover {
+    background-color: #1976d2;
+  }
+  
+  @media (max-width: 480px) {
+    .add-user-container {
+      width: 90%;
+      padding: 30px;
+    }
+  }
+  

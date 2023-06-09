@@ -1,14 +1,19 @@
-import React from 'react'
-import Carousel from 'react-bootstrap/Carousel';
+import React from 'react';
+import './Home.css';
 
-function Home() {
-
+const Home = () => {
   return (
-    
-    <div className='text-center'>
-       home
+    <div className="home-container">
+      <div className="home-content">
+        <h1>Welcome to My Website</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consequat massa et odio ultricies, sed molestie elit aliquet. Sed fermentum neque ut urna hendrerit tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
+        </p>
+        <button className="btn-primary">Learn More</button>
+      </div>
+ 
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

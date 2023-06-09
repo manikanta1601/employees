@@ -2,7 +2,9 @@ import React from 'react'
 
 const RemovedUsers = () => {
   return (
-    <div>RemovedUsers</div>
+    <div>
+      <h1>Removed Users</h1>
+    </div>
   )
 }
 

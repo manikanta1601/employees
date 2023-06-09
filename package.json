@@ -1,0 +1,36 @@
+{
+  "name": "husky",
+  "version": "1.0.0",
+  "description": "husky",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manikanta1601/employees.git"
+  },
+  "author": "Manikanta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manikanta1601/employees/issues"
+  },
+  "homepage": "https://github.com/manikanta1601/employees#readme",
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "prettier": "2.8.8"
+    
+  },
+  "husky":{
+    "hooks":{
+      "pre-commit":"lint-staged"
+    }
+    },
+    "lint-staged":{
+      "*.{js,json,css,md,html}":[
+        "prettier --single-quote --write",
+        "git add"
+      ]
+    }
+}
