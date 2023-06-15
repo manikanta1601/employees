@@ -12,4 +12,4 @@ Employee Data Management
 
 ### data base default admin
 ### username:admin
-### username:admin
+### password:admin
