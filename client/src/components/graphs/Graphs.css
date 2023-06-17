@@ -1,0 +1,75 @@
+.apexcharts-legend {
+	display: block;
+	margin: auto;
+	background-color: white;
+	width: max-content;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .apexcharts-menu {
+	color: black;
+  }
+  
+  .apexcharts-tooltip {
+	color: black;
+  }
+  
+  foreignObject {
+	width: 100%;
+  }
+  
+  .stacked-bar {
+	color: black;
+	background: rgba(255, 255, 255, 0.9);
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0.5);
+  }
+  
+  .pie {
+	padding: 4rem 2rem;
+	border-radius: 1rem;
+	border: 1px solid transparent;
+	background-color: rgba(0, 0, 0, 0.1);
+	box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0.5);
+  }
+  
+  .apexcharts-bar-series .apexcharts-series {
+	stroke: none;
+  }
+  
+  .apexcharts-bar-series .apexcharts-series-collapsed rect:not(.apexcharts-datalabels) {
+	fill: #4CAF50;
+	stroke: none;
+  }
+  
+  .apexcharts-bar-series .apexcharts-series-collapsed rect.apexcharts-datalabels {
+	fill: black;
+  }
+  
+  .apexcharts-tooltip.apexcharts-theme-light {
+	background: rgba(255, 255, 255, 0.9);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+  }
+  
+  @media screen and (max-width: 768px) {
+	.apexcharts-legend {
+	  font-size: 14px;
+	  padding: 8px;
+	}
+  
+	.stacked-bar {
+	  padding: 20px;
+	}
+  
+	.pie {
+	  padding: 2rem;
+	}
+  }
+  

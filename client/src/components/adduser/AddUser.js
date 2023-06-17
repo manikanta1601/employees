@@ -14,7 +14,8 @@ const AddUser = () => {
   } = useForm();
 
   const formSubmit = (newUser) => {
-    newUser = { ...newUser, role: 'employee' };
+    newUser = { ...newUser, role: "employee", tasks: [] };
+    
 
     axios
       .post('http://localhost:5000/user-api/add-user', newUser)

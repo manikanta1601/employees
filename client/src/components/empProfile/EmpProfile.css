@@ -1,0 +1,124 @@
+.emp-style {
+    margin-top: 6rem;
+    padding: 3rem;
+    max-width: 800px;
+    width: 100%;
+    background: #f2f2f2;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .employee {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #333;
+    font-family: Arial, sans-serif;
+  }
+  
+  .name {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #047c82;
+  }
+  
+  .department,
+  .email,
+  .phone,
+  .doj {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .edit-button {
+    background-color: #ffc107;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .edit-button:hover {
+    background-color: #ffa000;
+  }
+  
+  .emp-profile {
+    /* background-image: url(''); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .name {
+    color: #047c82;
+    font-weight: 500;
+  }
+  
+  .inputbox {
+    color: black;
+    width: 100%;
+  }
+  
+  .modal.transparent-backdrop .modal-content {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+  
+  .edit-form {
+    width: 500px;
+    max-width: 90%;
+    height: auto;
+    max-height: 80vh;
+    background: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    padding: 2rem;
+  }
+  
+  .modal {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: none;
+    box-shadow: none;
+  }
+  
+  @media (max-width: 768px) {
+    .emp-style {
+      padding: 2rem;
+    }
+  
+    .name {
+      font-size: 2rem;
+    }
+  
+    .department,
+    .email,
+    .phone,
+    .doj {
+      font-size: 1rem;
+    }
+  
+    .edit-button {
+      font-size: 1rem;
+      padding: 8px 16px;
+    }
+  
+    .edit-form {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+    }
+  }
+  

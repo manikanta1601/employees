@@ -8,8 +8,10 @@ import Login from "./components/login/Login";
 import ErrorPage from "./components/errorpage/ErrorPage"
 import AddUser from "./components/adduser/AddUser";
 import Users from "./components/users/Users";
-import RemovedUsers from "./components/removedusers/RemovedUsers";
+import AddTask from "./components/addtask/AddTask";
 import EmpDashboard from "./components/empdashboard/EmpDashboard";
+import EmpProfile from "./components/empProfile/EmpProfile";
+import UserDetails from "./components/userDetails/UserDetails";
 
 function App() {
   const routerObj = createBrowserRouter([
@@ -36,14 +38,21 @@ function App() {
           element:<Users/>
         },
         {
-          path:"/removed-users",
-          element:<RemovedUsers/>
-        },
-        {
           path:"/emp-dashboard",
           element:<EmpDashboard/>
+        },
+        {
+          path:"/add-task",
+          element:<AddTask/>
+        },
+        {
+          path:"/emp-profile",
+          element:<EmpProfile/>
+        },
+        {
+          path:"/user-details",
+          element:<UserDetails/>
         }
-
 
       ]
     }

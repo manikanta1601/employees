@@ -1,40 +1,76 @@
-.users-container {
-  margin: 20px;
+.error-message {
+  color: red;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
-.custom-table {
-  background-color: #f8f9fa;
-  border: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.table-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem; /* Add padding for better spacing */
 }
 
-.custom-table thead {
-  background-color: #343a40;
+.table-heading {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #0843f4;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Add horizontal scrolling */
+}
+
+.data-grid-container {
+  height: 100%;
+  width: 100%;
+}
+
+.btn-remove {
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #333333;
+  outline: none;
+  padding: 0.5rem 1rem;
+  margin-right: 10px;
+}
+
+.btn-remove:hover {
+  background-color: #333333;
   color: #ffffff;
 }
 
-.custom-table thead th {
-  padding: 12px;
+.btn-details {
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #333333;
+  outline: none;
+  padding: 0.5rem 1rem;
+}
+
+.btn-details:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.header-row {
+  background-color: #f8f8f8;
   font-weight: bold;
 }
 
-.custom-table tbody td {
-  padding: 10px;
+.header-row .MuiDataGrid-cell:first-child {
+  text-decoration: underline;
 }
 
-.error-message {
-  color: red;
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-@media screen and (max-width: 576px) {
-  .custom-table thead {
-    font-size: 14px;
+@media screen and (max-width: 767px) {
+  .table-heading {
+    font-size: 1.5rem;
   }
-
-  .custom-table tbody td {
-    font-size: 14px;
+  
+  .data-grid-container {
+    height: 400px; /* Adjust the height for better mobile experience */
   }
 }

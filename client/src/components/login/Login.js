@@ -27,74 +27,77 @@ function Login() {
   };
 
   return (
-    <div className="login-container login-container--background">
-      {error?.length !== 0 && <p className="text-danger display-1">{error}</p>}
-      <form className="login-form" onSubmit={handleSubmit(handleUserLogin)}>
-        <div className="form-group">
-          <label htmlFor="username" className="form-label">
-            Username
-          </label>
-          <input
-            type="text"
-            id="username"
-            className="form-control"
-            {...register('username', {
-              required: true,
-              minLength: 4,
-              maxLength: 22
-            })}
-          />
-          {errors.username?.type === 'required' && (
-            <p className="error-message">*Enter your username</p>
-          )}
-          {errors.username?.type === 'minLength' && (
-            <p className="error-message">
-              *Minimum 4 characters are required
-            </p>
-          )}
-          {errors.username?.type === 'maxLength' && (
-            <p className="error-message">
-              *Maximum 22 characters are allowed
-            </p>
-          )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <div className="password-input-container">
+    <div className="login-container">
+      <div className="login-container--background"></div>
+      <div className="login-form-container">
+        {error?.length !== 0 && <p className="text-danger display-1">{error}</p>}
+        <form className="login-form" onSubmit={handleSubmit(handleUserLogin)}>
+          <div className="form-group">
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
             <input
-              type={showPassword ? 'text' : 'password'}
-              id="password"
+              type="text"
+              id="username"
               className="form-control"
-              {...register('password', { required: true, minLength: 4 })}
+              {...register('username', {
+                required: true,
+                minLength: 4,
+                maxLength: 22
+              })}
             />
-            <i
-              className={`password-toggle-icon ${showPassword ? 'show' : ''}`}
-              onClick={togglePasswordVisibility}
-            >
-              {showPassword ? (
-                <i className="fas fa-eye-slash"></i>
-              ) : (
-                <i className="fas fa-eye"></i>
-              )}
-            </i>
+            {errors.username?.type === 'required' && (
+              <p className="error-message">*Enter your username</p>
+            )}
+            {errors.username?.type === 'minLength' && (
+              <p className="error-message">
+                *Minimum 4 characters are required
+              </p>
+            )}
+            {errors.username?.type === 'maxLength' && (
+              <p className="error-message">
+                *Maximum 22 characters are allowed
+              </p>
+            )}
           </div>
-          {errors.password?.type === 'required' && (
-            <p className="error-message">*Enter your password</p>
-          )}
-          {errors.password?.type === 'minLength' && (
-            <p className="error-message">
-              *Minimum 4 characters are required for the password
-            </p>
-          )}
-        </div>
 
-        <button type="submit" className="btn btn-primary">
-          Login
-        </button>
-      </form>
+          <div className="form-group">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <div className="password-input-container">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                className="form-control"
+                {...register('password', { required: true, minLength: 4 })}
+              />
+              <i
+                className={`password-toggle-icon ${showPassword ? 'show' : ''}`}
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <i className="fas fa-eye-slash"></i>
+                ) : (
+                  <i className="fas fa-eye"></i>
+                )}
+              </i>
+            </div>
+            {errors.password?.type === 'required' && (
+              <p className="error-message">*Enter your password</p>
+            )}
+            {errors.password?.type === 'minLength' && (
+              <p className="error-message">
+                *Minimum 4 characters are required for the password
+              </p>
+            )}
+          </div>
+
+          <button type="submit" className="btn btn-primary">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

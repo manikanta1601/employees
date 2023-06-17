@@ -4,6 +4,7 @@ import Footer from "../footer/Footer"
 import { Outlet } from 'react-router-dom'
 import "./rootlayout.css"
 function RootLayout() {
+  
   return (
     <div style={{
       minHeight: "100vh",

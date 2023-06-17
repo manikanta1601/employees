@@ -83,15 +83,7 @@ function NavbarMain() {
                       Employees
                     </Link>
                   </li>
-                  <li className="nav-item dropdown">
-                    <Link
-                      className="nav-link"
-                      style={{ padding: "1.3rem" }}
-                      to="/removed-users"
-                    >
-                      Removed Employees
-                    </Link>
-                  </li>
+                  
                 </React.Fragment>
               )}
 
@@ -106,6 +98,24 @@ function NavbarMain() {
                       Dashboard
                     </Link>
                   </li>
+                  <li className="nav-item dropdown">
+                    <Link
+                      className="nav-link"
+                      style={{ padding: "1.3rem" }}
+                      to="/add-task"
+                    >
+                      Add Task 
+                    </Link>
+                  </li>
+                  <li className="nav-item dropdown">
+                      <Link
+                        className="nav-link "
+                        style={{ padding: "1.3rem" }}
+                        to="/emp-profile"
+                      >
+                        My Profile
+                      </Link>
+                    </li>
                 </React.Fragment>
               )}
             </ul>

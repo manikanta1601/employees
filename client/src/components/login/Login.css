@@ -5,21 +5,50 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-}
-.login-container--background {
   background-image: url("https://img.freepik.com/free-photo/standard-quality-control-collage-concept_23-2149595835.jpg?w=1060&t=st=1686192631~exp=1686193231~hmac=ef36b8972faf6ca22a3c7f9de765a0c6ee8647ab1fde9af25f7cf9077e236dc4");
-  /* Additional background styles */
-
-  /* Responsive background image */
   background-size: cover;
   background-position: center;
 }
 
-@media (max-width: 768px) {
+
+.login-container--background {
+  background-image: url("https://img.freepik.com/free-photo/standard-quality-control-collage-concept_23-2149595835.jpg?w=1060&t=st=1686192631~exp=1686193231~hmac=ef36b8972faf6ca22a3c7f9de765a0c6ee8647ab1fde9af25f7cf9077e236dc4");
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 767px) {
   .login-container--background {
     background-size: contain;
     background-position: top;
   }
+
+  .login-form {
+    max-width: 100%;
+    padding: 20px;
+  }
+  
+  .login-form .form-label {
+    font-size: 1rem;
+  }
+  
+  .login-form .form-control {
+    font-size: 0.9rem;
+  }
+  
+  .login-form .text-danger {
+    font-size: 0.7rem;
+  }
+  
+  .login-form .btn-primary {
+    font-size: 0.9rem;
+  }
+}
+
+.login-form-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .login-form {
@@ -68,10 +97,4 @@
 
 .login-form .btn-primary:hover {
   background-color: #0056b3;
-}
-
-@media (max-width: 767px) {
-  .login-form {
-    max-width: 100%;
-  }
 }
