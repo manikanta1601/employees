@@ -34,7 +34,7 @@ const Users = () => {
 
   const deleteUser = (user) => {
     axios
-      .delete(`http://localhost:5000/user-api/delete-user/${user.username}`, {
+      .delete(`http://localhost:5000/user-api/delete-user/${user.email}`, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((response) => {

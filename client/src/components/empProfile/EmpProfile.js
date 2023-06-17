@@ -4,90 +4,116 @@ import axios from 'axios';
 import { loginContext } from '../../context/loginContext';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
-import Card from 'react-bootstrap/Card';
+import { useForm } from "react-hook-form";
+import Card from "react-bootstrap/Card";
+import { taskContext } from '../../context/TaskContextProvider';
 import './EmpProfile.css';
 
-function EmpProfile() {
-  let [currentUser, err, userLoginStatus, loginUser, logoutUser, role] = useContext(loginContext);
-  let token = sessionStorage.getItem('token');
-  let [error, setError] = useState('');
-  //state of user to edit
-  let [userToEdit, setUserToEdit] = useState({});
-  // State variable to hold the updated user details
-  const [updatedUser, setUpdatedUser] = useState({});
+const EmpProfile = () => {
+  let [tasks,setTasks]=useContext(taskContext)
+let [error, setError] = useState("");
+let token = sessionStorage.getItem("token");
+let [currentUser, err, userLoginStatus, loginUser, logoutUser, role,setCurrentUser] =
+useContext(loginContext);
+let {
+  register,
+  handleSubmit,
+  setValue,
+  getValues,
+  formState: { errors },
+} = useForm();
+const [show, setShow] = useState(false);
+const [userToEdit, setUserToEdit] = useState({});
 
-  //useForm
-  let {
-    register,
-    setValue,
-    getValues,
-    handleSubmit,
-    formState: { errors },
-    reset
-  } = useForm();
-  const userObj = currentUser;
-  //navigate hook
-  let navigate = useNavigate();
-  //modal state
-  const [show, setShow] = useState(false);
+const handleClose = () => setShow(false);
+const handleShow = () => setShow(true);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const editUser = (userToEdit) => {
-    // Show modal
-    handleShow();
+const getUsers = () => {
+ 
+  axios
+    .get(`http://localhost:5000/user-api/get-emp/${currentUser.email}`, {
+      headers: { Authorization: "Bearer " + token },
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        setTasks(response.data.payload);
+        
+        
+      }
+      if (response.status !== 200) {
+        setError(response.data.message);
+      }
+    })
+    .catch((err) => {
+      if (err.response) {
+        setError(err.message);
+        console.log(err.response);
+      } else if (err.request) {
+        setError(err.message);
+      } else {
+        setError(err.message);
+      }
+    });
+  // reset();
+};
 
-    // Set user edit state
-    setUserToEdit(userToEdit);
-  };
+// edit user
+const editUser = (userObj) => {
+  handleShow();
+  setUserToEdit(userObj);
+  setValue("username", userObj?.username);
+  setValue("jod", userObj?.jod);
+  setValue("password", userObj?.password);
+  setValue("department", userObj?.department)
+  setValue("email", userObj?.email);
+  setValue("phone",userObj?.phone)
+};
+//   saveModifiedUser
+const saveModifiedUser = () => {
+  handleClose();
+  let modifieduser = getValues();
 
-  //save modified user
-  const saveUser = () => {
-    // Close modal
-    handleClose();
+  axios
+    .put( `http://localhost:5000/user-api/update-user`,
+    modifieduser,
+    {
+      headers: { Authorization: "Bearer " + token },
+    })
+    .then((response) => {
+      if (response.status === 200) {
 
-    // Get values from form
-    let modifiedUser = getValues();
-    console.log(modifiedUser);
+        getUsers();
+      }
+    })
+    .catch((err) => {
+      if (err.response) {
+        setError(err.message);
+        console.log(err.response);
+      } else if (err.request) {
+        setError(err.message);
+      } else {
+        setError(err.message);
+      }
+    });
+};
 
-    // Modify user in DB
-    axios
-      .put(`http://localhost:5000/user-api/update-user/${userToEdit.username}`, modifiedUser, {
-        headers: { Authorization: 'Bearer ' + token }
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          console.log(response.data.message);
-          setUpdatedUser(modifiedUser);
-        } else {
-          setError(response.data.message);
-        }
-      })
-      .catch((err) => {
-        if (err.response) {
-          setError(err.message);
-        } else if (err.request) {
-          setError(err.message);
-        } else {
-          setError(err.message);
-        }
-      });
 
-    reset();
-  };
+
+useEffect(() => {
+  getUsers();
+}, []);
 
   return (
     <div className="container users-data d-flex justify-content-center align-items-center emp-profile">
       <div className="emp-style">
         <div className="employee">
-          <h1 className="name">{updatedUser.username || userObj.username}</h1>
-          <p className="department">Dept - {updatedUser.department || userObj.department}</p>
-          <p className="email">Email - {updatedUser.email || userObj.email}</p>
-          <p className="phone">Ph: {updatedUser.phone || userObj.phone}</p>
-          <p className="doj">DOJ - {userObj.jod}</p>
+        <h1 class="name">{tasks?.username}</h1>
+  <p class="department">Dept - {tasks?.department}</p>
+  <p class="email">Email - {tasks?.email}</p>
+  <p class="phone">Ph:  {tasks?.phone}</p>
+  <p class="doj">DOJ - {tasks?.jod}</p>
           <div className="d-flex justify-content-center mt-3">
-  <button className="btn btn-warning" onClick={() => editUser(userObj)}>
+  <button className="btn btn-warning" onClick={() => editUser(tasks)}>
     Edit
   </button>
 </div>
@@ -106,7 +132,7 @@ function EmpProfile() {
         <Modal.Body className="edit-form">
           <h3 className="fw-bold mb-4 pb-2 pb-md-0 mb-md-5 text-center">Edit Profile</h3>
           {/* edit form */}
-          <form onSubmit={handleSubmit(saveUser)}>
+          <form onSubmit={handleSubmit(saveModifiedUser)}>
             {/* name */}
             <div className="inputbox form-floating mb-3">
               <input
@@ -115,20 +141,29 @@ function EmpProfile() {
                 id="username"
                 placeholder="namexyz"
                 {...register('username')}
-                defaultValue={userToEdit.username}
               />
               <label htmlFor="username">Name</label>
             </div>
             <div className="inputbox form-floating mb-3">
               <input
                 type="text"
-                className="form-control form-inp"
+                className="form-control form-inp text-dark"
                 id="password"
                 placeholder="Password"
                 {...register('password')}
-                defaultValue={userToEdit.password}
               />
               <label htmlFor="department">Password</label>
+            </div>
+              {/* email */}
+              <div className="inputbox form-floating mb-3">
+              <input
+                type="email"
+                className="form-control form-inp"
+                id="email"
+                placeholder="email"
+                {...register('email')}disabled
+              />
+              <label htmlFor="email">Email</label>
             </div>
             {/* department */}
             <div className="inputbox form-floating mb-3">
@@ -138,7 +173,6 @@ function EmpProfile() {
                 id="department"
                 placeholder="Department"
                 {...register('department')}
-                defaultValue={userToEdit.department}
               />
               <label htmlFor="department">Department</label>
             </div>
@@ -150,7 +184,6 @@ function EmpProfile() {
                 id="phone"
                 placeholder="Phone Number"
                 {...register('phone')}
-                defaultValue={userToEdit.phone}
               />
               <label htmlFor="phone">Phone Number</label>
             </div>
@@ -160,7 +193,7 @@ function EmpProfile() {
               <Button variant="danger" className="btn-sm me-2" onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="primary" className="btn-sm" type="submit">
+              <Button variant="primary" className="btn-sm" onClick={saveModifiedUser}>
                 Save Changes
               </Button>
             </div>

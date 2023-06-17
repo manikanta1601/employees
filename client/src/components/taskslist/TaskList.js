@@ -54,7 +54,7 @@ const TaskList = () => {
 
   const getUsers = () => {
     axios
-      .get(`http://localhost:5000/user-api/get-user/${currentUser.username}`, {
+      .get(`http://localhost:5000/user-api/get-user/${currentUser.email}`, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((response) => {

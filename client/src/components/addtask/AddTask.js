@@ -37,7 +37,7 @@ const AddTask = () => {
   const putTask = (newTask) => {
     axios
       .put(
-        `http://localhost:5000/user-api/update-task/${currentUser.username}`,
+        `http://localhost:5000/user-api/update-task/${currentUser.email}`,
         newTask,
         {
           headers: { Authorization: "Bearer " + token },
@@ -66,12 +66,13 @@ const AddTask = () => {
   };
   const getUsers = () => {
     axios
-      .get(`http://localhost:5000/user-api/get-user/${currentUser.username}`, {
+      .get(`http://localhost:5000/user-api/get-user/${currentUser.email}`, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((response) => {
         if (response.status === 200) {
           setTasks(response.data.payload);
+          
         }
         if (response.status !== 200) {
           setError(response.data.message);
@@ -131,61 +132,59 @@ const AddTask = () => {
         endTime: formattedEndTime,
       };
     
+    
 
       if (tasks?.tasks?.length > 0) {
        
-        const isOverlap = tasks?.tasks?.some((task) => {
-          const taskStartTimeParts = task.startTime?.split(":");
-
-          const taskStartTime = {
-            hours: parseInt(taskStartTimeParts[0]),
-            minutes: parseInt(taskStartTimeParts[1]),
-          };
-
-          const taskEndTimeParts = task.endTime?.split(":");
-          const taskEndTime = {
-            hours: parseInt(taskEndTimeParts[0]),
-            minutes: parseInt(taskEndTimeParts[1]),
-          };
-
-          const startDateTimeParts = Task.startTime?.split(":");
-          const startDateTime = {
-            hours: parseInt(startDateTimeParts[0]),
-            minutes: parseInt(startDateTimeParts[1]),
-          };
-
-          const endDateTimeParts = Task.endTime?.split(":");
-          const endDateTime = {
-            hours: parseInt(endDateTimeParts[0]),
-            minutes: parseInt(endDateTimeParts[1]),
-          };
+        const convertTo24HourFormat = (timeString) => {
+          const [time, period] = timeString.split(" ");
+          let [hours, minutes] = time.split(":");
+          hours = parseInt(hours);
         
-          const isSameDate = task.date === Task.date;
+          if (period === "PM" && hours !== 12) {
+            hours += 12;
+          } else if (period === "AM" && hours === 12) {
+            hours = 0;
+          }
+        
+          return { hours, minutes: parseInt(minutes) };
+        };
+        
+        const startDateTime = convertTo24HourFormat(Task.startTime);
+        const endDateTime = {
+          hours: startDateTime.hours + Math.floor(Task.timeTaken / 60),
+          minutes: startDateTime.minutes + (Task.timeTaken % 60)
+        };
+        
+        const isOverlap = tasks?.tasks?.some((task) => {
+          const taskStartTime = convertTo24HourFormat(task.startTime);
+          const taskEndTime = convertTo24HourFormat(task.endTime);
+          const isSameDate = task.date === newTask.date;
 
           const isOverlap =
-            (startDateTime.hours < taskEndTime.hours &&
-              endDateTime.hours > taskStartTime.hours) ||
-            (startDateTime.hours === taskEndTime.hours &&
-              startDateTime.minutes < taskEndTime.minutes) ||
-            (startDateTime.hours === taskStartTime.hours &&
-              startDateTime.minutes < taskStartTime.minutes &&
-              endDateTime.hours === taskEndTime.hours) ||
-            (startDateTime.hours < taskStartTime.hours &&
-              endDateTime.hours === taskEndTime.hours) ||
-            (startDateTime.hours === taskStartTime.hours &&
-              startDateTime.minutes === taskStartTime.minutes &&
-              endDateTime.hours === taskEndTime.hours &&
-              endDateTime.minutes === taskEndTime.minutes);
+          (startDateTime.hours < taskEndTime.hours && endDateTime.hours > taskStartTime.hours) ||
+          (startDateTime.hours === taskEndTime.hours &&
+            (startDateTime.hours < taskEndTime.hours ||
+              (startDateTime.hours === taskEndTime.hours && startDateTime.minutes < taskEndTime.minutes))) ||
+          (startDateTime.hours === taskStartTime.hours &&
+            startDateTime.minutes < taskStartTime.minutes &&
+            endDateTime.hours === taskEndTime.hours) ||
+          (startDateTime.hours < taskStartTime.hours && endDateTime.hours === taskEndTime.hours) ||
+          (startDateTime.hours === taskStartTime.hours &&
+            startDateTime.minutes === taskStartTime.minutes &&
+            endDateTime.hours === taskEndTime.hours &&
+            endDateTime.minutes === taskEndTime.minutes);
 
-          
-          return isSameDate && isOverlap;
+  return isSameDate && isOverlap;
         });
-
+        
+        console.log("isOverlap:", isOverlap);
+        
         if (isOverlap) {
-          throw new Error(
-            "Task overlaps with existing tasks. Please select a different start time or duration."
-          );
-        }
+          throw new Error("Task overlaps with existing tasks or there is no time gap. Please select a different start time or duration.");
+        } 
+        
+        
 
         // Check if there are any tasks with the same date and time already present
         const isTaskPresent = tasks?.tasks.some((task) => {
@@ -221,7 +220,7 @@ const AddTask = () => {
       <div className="pt-4 ">
         <div className="card bg-transparent p-0 text-white border-0 rounded-0 lh-0 shadow-none d-block m-auto">
           <div className="card-body task mb-5">
-            <h3 className="title">Add New Task</h3>
+            <h3 className="title">Add new task</h3>
 
             <form onSubmit={handleSubmit(formSubmit)}>
               <div className="row justify-content-center">
@@ -338,7 +337,7 @@ const AddTask = () => {
                 </div>
               </div>
               <div className="b">
-                <button type="submit" className="btn d-block m-auto">
+                <button type="submit" className="btn btn-ad d-block m-auto">
                   <li>Submit</li>
                 </button>
               </div>
