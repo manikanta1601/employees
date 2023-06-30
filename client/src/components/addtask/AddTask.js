@@ -2,12 +2,14 @@ import axios from "axios";
 import { loginContext } from "../../context/loginContext";
 import { taskContext } from "../../context/TaskContextProvider";
 import React from "react";
+import { domainContext } from "../../context/DomainContextProvider";
 import { useState, useEffect, useContext } from "react";
 
 import "./AddTask.css";
 import { useForm } from "react-hook-form";
 import TaskList from "../taskslist/TaskList";
 const AddTask = () => {
+  let [domain,setDomain]=useContext(domainContext)
   let [alert, setAlert] = useState("");
   let today = new Date();
   let dd = today.getDate();
@@ -37,7 +39,7 @@ const AddTask = () => {
   const putTask = (newTask) => {
     axios
       .put(
-        `http://localhost:5000/user-api/update-task/${currentUser.email}`,
+        `${domain}/user-api/update-task/${currentUser.email}`,
         newTask,
         {
           headers: { Authorization: "Bearer " + token },
@@ -66,7 +68,7 @@ const AddTask = () => {
   };
   const getUsers = () => {
     axios
-      .get(`http://localhost:5000/user-api/get-user/${currentUser.email}`, {
+      .get(`${domain}/user-api/get-user/${currentUser.email}`, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((response) => {

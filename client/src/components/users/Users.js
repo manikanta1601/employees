@@ -4,9 +4,11 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "./Users.css";
+import {domainContext} from "../../context/DomainContextProvider"
 import { taskContext } from "../../context/TaskContextProvider";
 
 const Users = () => {
+  let [domain,setDomain]=useContext(domainContext)
   const [error, setError] = useState("");
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -17,7 +19,7 @@ const Users = () => {
 
   const getUsers = () => {
     axios
-      .get("http://localhost:5000/user-api/get-users", {
+      .get(`${domain}/user-api/get-users`, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((response) => {
@@ -34,7 +36,7 @@ const Users = () => {
 
   const deleteUser = (user) => {
     axios
-      .delete(`http://localhost:5000/user-api/delete-user/${user.email}`, {
+      .delete(`${domain}/user-api/delete-user/${user.email}`, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((response) => {

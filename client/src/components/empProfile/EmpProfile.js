@@ -6,10 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import Card from "react-bootstrap/Card";
+
+import {domainContext} from "../../context/DomainContextProvider"
 import { taskContext } from '../../context/TaskContextProvider';
 import './EmpProfile.css';
 
 const EmpProfile = () => {
+  let [domain,setDomain]=useContext(domainContext)
   let [tasks,setTasks]=useContext(taskContext)
 let [error, setError] = useState("");
 let token = sessionStorage.getItem("token");
@@ -31,7 +34,7 @@ const handleShow = () => setShow(true);
 const getUsers = () => {
  
   axios
-    .get(`http://localhost:5000/user-api/get-emp/${currentUser.email}`, {
+    .get(`${domain}/user-api/get-emp/${currentUser.email}`, {
       headers: { Authorization: "Bearer " + token },
     })
     .then((response) => {
@@ -74,7 +77,7 @@ const saveModifiedUser = () => {
   let modifieduser = getValues();
 
   axios
-    .put( `http://localhost:5000/user-api/update-user`,
+    .put(`${domain}/user-api/update-user`, modifieduser,
     modifieduser,
     {
       headers: { Authorization: "Bearer " + token },

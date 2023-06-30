@@ -1,10 +1,18 @@
 import React from 'react'
 import NavbarMain from "../navbar/NavbarMain"
+import { domainContext } from "../../context/DomainContextProvider";
 import Footer from "../footer/Footer"
 import { Outlet } from 'react-router-dom'
 import "./rootlayout.css"
 function RootLayout() {
-  
+  let [domain,setDomain]=useContext(domainContext)
+  useEffect(()=>{
+    let url=window.location.href;
+    let baseURL = url.split("/").slice(0, 3).join("/")
+    setDomain(baseURL.replace("://","://server."))
+    console.log(domain)
+  },[location])
+        
   return (
     <div style={{
       minHeight: "100vh",

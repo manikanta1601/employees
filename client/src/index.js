@@ -6,19 +6,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from "./reportWebVitals";
 import UserLoginContextStore from "./context/UserLoginContextStore";
 import TasksContextProvider from "./context/TaskContextProvider";
+import DomainContextProvider from "./context/DomainContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   
-    <UserLoginContextStore>
-    <TasksContextProvider>
-      
-      <App />
-     
-   
-    </TasksContextProvider>
-   
-    </UserLoginContextStore>
+  <UserLoginContextStore>
+  <TasksContextProvider>
+    <DomainContextProvider>
+    <App />
+    </DomainContextProvider>
+  </TasksContextProvider>
+  </UserLoginContextStore>
     
  
 );
