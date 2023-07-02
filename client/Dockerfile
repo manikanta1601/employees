@@ -13,7 +13,7 @@ RUN npm install
 # Copy the client code
 COPY . .
 
-# Build the React app
+# Build the React a
 RUN npm run build
 
 # Expose the production port
